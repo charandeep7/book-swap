@@ -7,7 +7,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -15,17 +14,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { firebaseAuth, useFirebase } from "@/context/Firebase";
+import { firebaseAuth } from "@/context/Firebase";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import Showloading from "./showloading";
 import { MenuIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 export default function UserAvatar() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const router = useRouter();
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
@@ -37,17 +34,15 @@ export default function UserAvatar() {
     });
   }, []);
   if (loading) return <Showloading />;
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        setUser(null);
-        toast.success("Signed out");
-      })
-      .catch((error) => {
-        // An error happened.
-        toast.error("Something went wrong");
-      });
+    try {
+      await signOut(auth);
+      setUser(null);
+      toast.success("Signed out");
+    } catch (err) {
+      console.error(err);
+    }
   };
   console.log(user);
   return (

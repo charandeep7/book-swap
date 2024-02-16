@@ -1,32 +1,36 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-import { firebaseAuth, useFirebase } from "@/context/Firebase";
-import { useRouter } from 'next/navigation'
-import { GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
-import Loading from '@/app/loading'
+"use client";
+import React, { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { firebaseApp, firebaseAuth } from "@/context/Firebase";
+import { useRouter } from "next/navigation";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+import Loading from "@/app/loading";
 
 export default function Signup() {
-  const router = useRouter()
-  const firebase = useFirebase()
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   const handleSignUp = async () => {
-    const googleProvider = new GoogleAuthProvider()
-    await signInWithPopup(firebaseAuth,googleProvider)
-  }
+    const auth = getAuth(firebaseApp);
+    const googleProvider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    onAuthStateChanged(firebaseAuth,(user) => {
-      if(user){
-        setLoading(false)
-        router.replace('/')
-      }else{
-        setLoading(false)
+    onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        setLoading(false);
+        router.replace("/");
+      } else {
+        setLoading(false);
       }
-    })
-  },[])
-  if(loading) return <Loading />
+    });
+  }, []);
+  if (loading) return <Loading />;
   return (
     <section>
       <div className="flex flex-col justify-center items-center sm:flex-row relative mt-16 p-4">
@@ -49,7 +53,7 @@ export default function Signup() {
             Sign up
           </h2>
           <p className="mt-2 text-center text-base text-gray-600">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <Link
               href="/signin"
               className="font-medium text-black transition-all duration-200 hover:underline"
@@ -60,9 +64,12 @@ export default function Signup() {
           <form action="#" method="POST" className="mt-8">
             <div className="space-y-5">
               <div>
-                <label htmlFor="name" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Full Name{' '}
+                <label
+                  htmlFor="name"
+                  className="text-base font-medium text-gray-900"
+                >
+                  {" "}
+                  Full Name{" "}
                 </label>
                 <div className="mt-2">
                   <input
@@ -74,9 +81,12 @@ export default function Signup() {
                 </div>
               </div>
               <div>
-                <label htmlFor="email" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Email address{' '}
+                <label
+                  htmlFor="email"
+                  className="text-base font-medium text-gray-900"
+                >
+                  {" "}
+                  Email address{" "}
                 </label>
                 <div className="mt-2">
                   <input
@@ -89,9 +99,12 @@ export default function Signup() {
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="text-base font-medium text-gray-900">
-                    {' '}
-                    Password{' '}
+                  <label
+                    htmlFor="password"
+                    className="text-base font-medium text-gray-900"
+                  >
+                    {" "}
+                    Password{" "}
                   </label>
                 </div>
                 <div className="mt-2">
@@ -135,5 +148,5 @@ export default function Signup() {
         </div>
       </div>
     </section>
-  )
+  );
 }

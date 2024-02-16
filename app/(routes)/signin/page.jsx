@@ -2,16 +2,21 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, getAuth  } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
-import { firebaseAuth, useFirebase } from "@/context/Firebase";
+import { firebaseApp, firebaseAuth } from "@/context/Firebase";
 
 export default function SignIn() {
   const router = useRouter();
   const handleSignIn = async () => {
+    const auth = getAuth(firebaseApp)
     const googleProvider = new GoogleAuthProvider()
-    await signInWithPopup(firebaseAuth,googleProvider)
+    try {
+      await signInWithPopup(auth,googleProvider)
+    } catch(err){
+      console.log(err)
+    }
   }
   const [loading, setLoading] = useState(true);
   useEffect(() => {

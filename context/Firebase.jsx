@@ -16,6 +16,7 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebaseApp);
+
 const googleProvider = new GoogleAuthProvider()
 export const FirebaseProvider = ({ children }) => {
     const signInWithGoogle = async () => {
