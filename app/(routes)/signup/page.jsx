@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { firebaseApp, firebaseAuth } from "@/context/Firebase";
 import { useRouter } from "next/navigation";
-import { GoogleAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import Loading from "@/app/loading";
 
 export default function Signup() {
