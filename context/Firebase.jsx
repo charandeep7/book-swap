@@ -18,8 +18,8 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider()
 export const FirebaseProvider = ({ children }) => {
-    const signInWithGoogle = () => {
-        signInWithPopup(firebaseAuth,googleProvider )
+    const signInWithGoogle = async () => {
+        signInWithPopup(firebaseAuth,googleProvider)
     }
     const user = firebaseAuth.currentUser
     
