@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export async function Home() {
   return (
-    <div className="w-full rounded-md">
+    <div className="w-full relative top-16 h-[calc(100vh-64px)]">
       <div className="relative z-20 flex flex-col items-center justify-center gap-4 overflow-hidden">
         <h1 className="md:text-5xl text-3xl lg:text-8xl mt-5 font-bold text-center relative">
           Book Swap
@@ -23,13 +23,13 @@ export async function Home() {
             as you embark on a journey of literary discovery with us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link target="_blank" href="https://github.com/charandeep7/icy-indulgence">
-              <Button className="cursor-pointer">
+            <Link target="_blank" href="https://github.com/charandeep7/book-swap">
+              <Button className="cursor-pointer w-full">
                 Github Repo &nbsp; <GithubIcon size={20} />{" "}
               </Button>
             </Link>
             <Link href="/trendingbooks">
-              <Button variant="outline" className="bg-white cursor-pointer">
+              <Button variant="outline" className="cursor-pointer w-full">
                 Trending Books &nbsp; <NotebookIcon size={20} />{" "}
               </Button>
             </Link>

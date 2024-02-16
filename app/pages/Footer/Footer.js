@@ -2,7 +2,7 @@ import React from 'react'
 
 export function Footer() {
   return (
-    <section className="relative mt-1 lg:mt-16 overflow-hidden border-t-2 bg-white py-8">
+    <section className="relative mt-2 lg:mt-16 overflow-hidden border-t-2 py-8">
       <div className="container relative z-10 mx-auto px-4">
         <div className="-m-8 flex flex-wrap items-center justify-between">
           <div className="w-auto p-8">

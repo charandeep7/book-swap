@@ -16,24 +16,38 @@ const obj = {
   img: "/explore/cpp.webp",
 };
 
-export default function TrendingBooks({ className, ...props }) {
+export default function TrendingBooks() {
   const books = Array.from({ length: 100 }, () => ({ ...obj }));
   return (
     <div className="relative top-16  p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-      {books.map(({ title, img }, index) => (
-          <Card className={cn("w-[380px] shadow-md", className)} {...props} key={index}>
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {books.map(({ title, img }, index) => (
+          <Card
+            className="w-[380px] shadow-md"
+            key={index.toString()}
+          >
             <CardContent className="flex flex-col justify-center items-center p-2 overflow-hidden">
-                <Image src={img} alt={index} height={250} width={150} className="object-contain" />
-                <p className="text-2xl p-2">{title}</p>
+              <Image
+                src={img}
+                alt={index}
+                height={250}
+                width={150}
+                className="object-contain"
+              />
+              <CardTitle className="text-2xl p-2">{title}</CardTitle>
             </CardContent>
             <CardFooter className="mt-2 flex flex-col sm:flex-row gap-4">
-              <Button className="w-full p-2" variant="outline">Expand &nbsp;<ChevronRight size={18} /></Button>
-              <Button className="w-full p-2" >Kitish &nbsp; <User2Icon size={18} /></Button>
+              <Button className="w-full p-2" variant="outline">
+                Expand &nbsp;
+                <ChevronRight size={18} />
+              </Button>
+              <Button className="w-full p-2">
+                Kitish &nbsp; <User2Icon size={18} />
+              </Button>
             </CardFooter>
           </Card>
-      ))}
-        </div>
+        ))}
+      </div>
     </div>
   );
 }

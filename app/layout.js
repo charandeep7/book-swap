@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`min-h-screen bg-cover relative selection:text-pink-500 selection:bg-muted ${inter.className}`}
+        className={`selection:text-pink-500 selection:bg-muted ${inter.className}`}
       >
         <FirebaseProvider>
           <Toaster />
