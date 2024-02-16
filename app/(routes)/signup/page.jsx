@@ -4,14 +4,18 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { firebaseAuth, useFirebase } from "@/context/Firebase";
 import { useRouter } from 'next/navigation'
-import { onAuthStateChanged } from 'firebase/auth'
+import { GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
 import Loading from '@/app/loading'
 
 export default function Signup() {
   const router = useRouter()
   const firebase = useFirebase()
-  const  { signInWithGoogle } = firebase
   const [loading, setLoading] = useState(true);
+
+  const handleSignUp = async () => {
+    const googleProvider = new GoogleAuthProvider()
+    await signInWithPopup(firebaseAuth,googleProvider)
+  }
   useEffect(() => {
     onAuthStateChanged(firebaseAuth,(user) => {
       if(user){
@@ -113,7 +117,7 @@ export default function Signup() {
             <button
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-              onClick={async () => await signInWithGoogle()}
+              onClick={() => handleSignUp()}
             >
               <span className="mr-2 inline-block">
                 <svg
