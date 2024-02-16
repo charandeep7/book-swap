@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const FirebaseContext = createContext(null);
 
@@ -19,7 +19,7 @@ export const firebaseAuth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider()
 export const FirebaseProvider = ({ children }) => {
     const signInWithGoogle = () => {
-        signInWithRedirect(firebaseAuth,googleProvider )
+        signInWithPopup(firebaseAuth,googleProvider )
     }
     const user = firebaseAuth.currentUser
     
